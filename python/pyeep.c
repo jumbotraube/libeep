@@ -336,12 +336,28 @@ static PyMethodDef methods[] = {
   {NULL, NULL, 0, NULL}
 };
 ///////////////////////////////////////////////////////////////////////////////
-// module initialization
-PyMODINIT_FUNC
-initpyeep(void) {
-  // init libeep
-  libeep_init();
+// module initialization: python 2.7
+// PyMODINIT_FUNC
+// initpyeep(void) {
+//   // init libeep
+//   libeep_init();
 
-  // register methods
-  (void)Py_InitModule("pyeep", methods);
+//   // register methods
+//   (void)Py_InitModule("pyeep", methods);
+// }
+//////////////////////////////////////////////////////////////////////////////
+// module initialization: python 3.8
+static struct PyModuleDef pyeep = {
+    PyModuleDef_HEAD_INIT,
+    "pyeep",   /* name of module */
+    NULL, /* module documentation, may be NULL */
+    -1,       /* size of per-interpreter state of the module,
+                 or -1 if the module keeps state in global variables. */
+    methods
+};
+
+PyMODINIT_FUNC
+PyInit_pyeep(void)
+{
+    return PyModule_Create(&pyeep);
 }

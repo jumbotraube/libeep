@@ -140,7 +140,7 @@ endif()
 ##########
 # python #
 ##########
-find_package(PythonLibs 2.7)
+find_package(PythonLibs)
 if(PYTHONLIBS_FOUND)
   message("python libs: ${PYTHON_LIBRARIES}")
   add_library(pyeep MODULE python/pyeep.c)
